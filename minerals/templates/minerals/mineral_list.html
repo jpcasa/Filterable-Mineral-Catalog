@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}Macky's Minerals: A magnificant catalog of minerals{% endblock %}
+
+{% block content %}
+    <div class="grid-100 text-center">
+        <h3>{{ title }}</h3>
+        {% if title != 'Mineral List' %}
+            <a href="{% url 'minerals:list' %}" class="margin-bottom">Go Back</a>
+        {% endif %}
+    </div>
+    <ul class="minerals__container">
+        {% for mineral in minerals %}
+            <li class="minerals__item">
+                <a class="minerals__anchor" href="{% url 'minerals:detail' pk=mineral.pk %}">{{ mineral.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+{% block random_mineral %}
+    <div class="minerals__random">
+      <a class="minerals__anchor" href="{% url 'minerals:detail' pk=random_mineral_id %}">Show random mineral</a>
+    </div>
+{% endblock %}

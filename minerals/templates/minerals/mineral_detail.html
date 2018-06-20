@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% load static from staticfiles %}
+{% load attr %}
+
+{% block title %}Macky's Minerals: A magnificant catalog of minerals{% endblock %}
+
+{% block content %}
+
+<h1 class="mineral__name">{{ mineral.name }}</h1>
+<div class="mineral__image-bg">
+  <img class="mineral__image" src="{% static 'images' %}/{{ mineral.name }}.jpg">
+  <p class="mineral__caption">{{ mineral.image_caption }}</p>
+</div>
+<div class="mineral__table-container">
+  <table class="mineral__table">
+    <tr>
+      <td class="mineral__category">Category</td>
+      <td>{{ mineral.category }}</td>
+    </tr>
+    <tr>
+      <td class="mineral__category">Formula</td>
+      <td class="mineral__formula">{{ mineral.formula|safe }}</td>
+    </tr>
+    {% for field in fields %}
+        <tr>
+          <td class="mineral__category">{{ field.name|titlize|title }}</td>
+          <td>{{ field.value }}</td>
+        </tr>
+    {% endfor %}
+  </table>
+</div>
+
+{% endblock %}
+
+{% block random_mineral %}
+    <div class="minerals__random">
+      <a class="minerals__anchor" href="{% url 'minerals:detail' pk=random_mineral_id %}">Show random mineral</a>
+    </div>
+{% endblock %}
